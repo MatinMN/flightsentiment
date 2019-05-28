@@ -1,5 +1,6 @@
 from collections import defaultdict
-import haversine, json
+from haversine import haversine
+import json
 
 # Get the graph
 graph_file = open("graph.txt")
@@ -9,13 +10,16 @@ cities = open('cities.json')
 cities = json.load(cities)
 cities = cities['data']['cities']
 
+# A dictionary to return all paths with distances
 
-# A list to return all paths with distances
-paths = {}
 
 class Graph:
 
     count_paths = 1
+    paths = []
+    sortPaths = []
+    distances = []
+    distances.append(0)
 
     def __init__(self, vertices):
         # No. of vertices
@@ -27,34 +31,51 @@ class Graph:
     def addEdge(self, u, v):
         self.graph[u].append(v)
 
-
-    def printAllPathsUtil(self, u, d, visited, path):
+    def getAllPathsUtil(self, u, d, visited, path):
 
         # Mark the current node as visited and store in path
         visited[u] = True
         path.append(u)
+        newPath = list(path)
+        length = len(newPath)
 
-        # If current vertex is same as destination, then print
-        # current path[]
+        if (length > 1):
+            srcIndex = newPath[length-2]
+            destIndex = newPath[length-1]
+
+            src = (cities[srcIndex]['lat'], cities[srcIndex]['long'])
+            dest = (cities[destIndex]['lat'], cities[destIndex]['long'])
+            # print (src)
+            # print (dest)
+            distance = haversine(src, dest)
+            distance = distance + self.distances[len(self.distances)-1]
+            self.distances.append(distance)
+            # print (self.distances)
+
+        # If current vertex is same as destination, then print current path[]
         if u == d:
-            print(path)
-            newPath = list(path)
+            # print(path)
             if(len(path) > 3 and len(path) < 6):
-                paths[self.count_paths] = newPath
+                self.paths.append(newPath)
+                newPath.append(int(self.distances[len(self.distances)-1]))
+                sub_list = [self.count_paths, int(self.distances[len(self.distances)-1])]
+                self.sortPaths.append(sub_list)
                 self.count_paths = self.count_paths + 1
+
         else:
             # If current vertex is not destination
             # Recur for all the vertices adjacent to this vertex
             for i in self.graph[u]:
                 if visited[i] == False:
-                    self.printAllPathsUtil(i, d, visited, path)
+                    self.getAllPathsUtil(i, d, visited, path)
 
         # Remove current vertex from path[] and mark it as unvisited
         path.pop()
+        self.distances.pop()
         visited[u] = False
 
     # Prints all paths from 's' to 'd'
-    def printAllPaths(self, s, d):
+    def getAllPaths(self, s, d):
 
         # Mark all the vertices as not visited
         visited = [False]*(self.V)
@@ -63,27 +84,32 @@ class Graph:
         path = []
 
         # Call the recursive helper function to print all paths
-        self.printAllPathsUtil(s, d, visited, path)
+        self.getAllPathsUtil(s, d, visited, path)
+    
+    def getPaths(self, src, dest):
+        self.getAllPaths(src, dest)
+        finalPaths = []
+        # print (paths)
+        self.sortPaths = sorted(self.sortPaths,key=lambda l:l[1], reverse=False)
+
+        for sub_list in self.sortPaths:
+            finalPaths.append(self.paths[sub_list[0]-1])
+        
+        return finalPaths
+        # print (self.paths)
+        # print (finalPaths)
 
 
-# Create a graph given in the above diagram
+
+
+# Initialize the graph
 graph = Graph(11)
 
-
-# Create the graph
+# Add edges to the graph
 for edge in graph_file:
     edge = edge.split(' ')
     vertex1 = int(edge[0])
     vertex2 = int(edge[1])
-    print(str(vertex1) + " " + str(vertex2))
-    # print(srcCity + " " + destCity)
-
     graph.addEdge(vertex1, vertex2)
 
-s = 1
-d = 9
-print("Following are all different paths from %d to %d :" % (s, d))
-
-graph.printAllPaths(s, d)
-
-print(paths)
+# print(paths)

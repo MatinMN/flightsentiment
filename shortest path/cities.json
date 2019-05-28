@@ -2,6 +2,9 @@
     "data" : {
         "cities" : [
             {
+
+            },
+            {
                 "id" : 1,
                 "name" : "Kuala Lumpur",
                 "code" : "kl",
