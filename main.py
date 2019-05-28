@@ -1,3 +1,4 @@
+from __future__ import division
 from newsapi import NewsApiClient
 from helper import *
 from requests import get
@@ -5,6 +6,9 @@ from bs4 import BeautifulSoup
 import os
 
 newsapi = NewsApiClient(api_key='3d9b2341d48c4f28bbf4c34e10e0521e')
+
+POSITIVE_LIST = loadPositiveWords()
+NEGETIVE_LIST = loadNegetiveWords()
 
 def get_sentiment():
 
@@ -40,12 +44,21 @@ def get_sentiment():
 
         articles = all_articles['articles']
 
-    
-
         url = articles[0]['url']
-        response = get(url)
-        html = BeautifulSoup(response.content, 'html.parser')
+        
+
+        exists = os.path.isfile('data/'+name+'-article.json')
+        if exists:
+            with open('data/'+name +'-article.html') as article_file:  
+                html = BeautifulSoup(article_file.read(), 'html.parser')
+        else:
+            response = get(url)    
+            html = BeautifulSoup(response.content, 'html.parser')
+            with open('data/'+name + '-article.html', 'w+') as article_file:  
+                article_file.write(response.content)
+
         article = html.get_text()
+
         article = " ".join(article.split())
 
         words_arr = article.split(" ")
@@ -53,10 +66,12 @@ def get_sentiment():
         results = {}
 
         freq_arr = {}
-        words_arr = remove_stopwords(words_arr)
+        
         positive_freq = 0
         negetive_freq = 0
+
         print("counting words for " + name)
+
         for word in words_arr:
             if(len(word) < 10):
 
@@ -69,14 +84,18 @@ def get_sentiment():
                 if(word in NEGETIVE_LIST):
                     negetive_freq += 1
 
+        words_arr = remove_stopwords(words_arr)
+
         results['word_freq'] = freq_arr
         results["negetive_score"] = negetive_freq
         results["positive_score"] = positive_freq
+        results["score"] = (positive_freq / (positive_freq+positive_freq)) * 100
 
-
-        overall_results[str(countries)] = results
+        overall_results[str(name)] = results
 
 
     return overall_results
 
-print get_sentiment()
+result = get_sentiment()
+
+print(result['japan']['score'])
