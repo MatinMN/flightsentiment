@@ -48,14 +48,14 @@
             },
             {
                 "id" : 7,
-                "name" : "Toronto",
+                "name" : "Ontario",
                 "code" : "to",
                 "lat" : 48.37426019999999,
                 "long" : -89.3194986 
             },
             {
                 "id" : 8,
-                "name" : "Washington",
+                "name" : "Virginia",
                 "code" : "wa",
                 "lat" : 36.8956837,
                 "long" : -76.2000161 
