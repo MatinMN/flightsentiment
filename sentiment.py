@@ -48,7 +48,7 @@ def get_sentiment():
         url = articles[0]['url']
         
 
-        exists = os.path.isfile('data/'+name+'-article.json')
+        exists = os.path.isfile('data/'+name+'-article.html')
         if exists:
             with open('data/'+name +'-article.html') as article_file:  
                 html = BeautifulSoup(article_file.read(), 'html.parser')

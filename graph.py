@@ -106,6 +106,9 @@ class Graph:
     def getAllPossiblePaths(self):
         return self.all_paths
 
+    def getNumberAllPaths(self):
+        return len(self.all_paths)
+
 
 
 
