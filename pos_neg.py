@@ -10,19 +10,16 @@ import plotly
 
 plotly.tools.set_credentials_file(username='abdrsh', api_key='soOFfebkRlafYkLGAijA')
 
-result = {"positive": 0, "negative": 10}
-countries = {"Kuala Lumpur": result}
 
-result = {"positive": 16.5, "negative": 5}
-countries['Singapore'] = result
 def pos_neg(countries): 
-    lc = [*countries]
+    
     pos=[]
     neg = []
-
-    for i in range(len(lc)):
-        pos.append(countries.get(lc[i]).get('positive'))
-        neg.append(countries.get(lc[i]).get('negative'))
+    lc = []
+    for country in countries:
+        pos.append(countries[country]['positive'])
+        neg.append(countries[country]['negative'])
+        lc.append(country)
 
     data = [
       go.Bar(
@@ -42,7 +39,7 @@ def pos_neg(countries):
     )
 
     fig = go.Figure(data=data, layout=layout)
-    py.iplot(fig, filename='+- function')
+    py.plot(fig, filename='+- function')
 
 
 # In[ ]:
