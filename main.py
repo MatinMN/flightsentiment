@@ -2,6 +2,7 @@ from __future__ import division
 from sentiment import *
 from graph import graph
 from pos_neg import *
+from maper import *
 
 print("Welcome to the flightsentiment app")
 print("Enter which cities you would like to travel to :")
@@ -44,8 +45,12 @@ print(sentiment_value)
 print(path_scores)
 print("this is the best path")
 print(best_path)
-    
+
+print("Ploting best path")
+plot_shortest_path(best_path)
+
 pos_neg(sentiment_results)
 for i in range(1,len(city_names)):
     name = city_names[i]['name']
     stop_words(sentiment_results[name]['word_freq'],name)
+
