@@ -7,7 +7,7 @@
 import plotly.plotly as py
 import plotly.graph_objs as go
 import plotly
-
+from helper import *
 plotly.tools.set_credentials_file(username='abdrsh', api_key='soOFfebkRlafYkLGAijA')
 
 
@@ -40,6 +40,33 @@ def pos_neg(countries):
 
     fig = go.Figure(data=data, layout=layout)
     py.plot(fig, filename='+- function')
+
+
+
+def stop_words(freq_arr,name): 
+    
+    stops = STOPLIST
+    freq = []
+    for word in STOPLIST:
+       if word in freq_arr:
+          freq.append(freq_arr[str(word)])
+       else:
+          freq.append(0)
+
+    data = [
+      go.Bar(
+        y = freq,
+        x = stops,
+        name = "frequency"
+      )
+    ]
+
+    layout = go.Layout(
+        barmode='single'
+    )
+
+    fig = go.Figure(data=data, layout=layout)
+    py.plot(fig, filename='+- '+name)
 
 
 # In[ ]:

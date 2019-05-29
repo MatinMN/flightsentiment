@@ -6,7 +6,7 @@ import json
 graph_file = open("graph.txt")
 
 # Get the names of the citis in a list
-cities = open('cities.json')
+cities = open('cities_with_id.json')
 cities = json.load(cities)
 cities = cities['data']['cities']
 
@@ -16,6 +16,7 @@ cities = cities['data']['cities']
 class Graph:
 
     count_paths = 1
+    all_paths = []
     paths = []
     sortPaths = []
     distances = []
@@ -61,6 +62,9 @@ class Graph:
                 sub_list = [self.count_paths, int(self.distances[len(self.distances)-1])]
                 self.sortPaths.append(sub_list)
                 self.count_paths = self.count_paths + 1
+            else:
+                newPath.append(int(self.distances[len(self.distances)-1]))
+            self.all_paths.append(newPath)
 
         else:
             # If current vertex is not destination
@@ -86,7 +90,7 @@ class Graph:
         # Call the recursive helper function to print all paths
         self.getAllPathsUtil(s, d, visited, path)
     
-    def getPaths(self, src, dest):
+    def getShortestPaths(self, src, dest):
         self.getAllPaths(src, dest)
         finalPaths = []
         # print (paths)
@@ -98,6 +102,12 @@ class Graph:
         return finalPaths
         # print (self.paths)
         # print (finalPaths)
+
+    def getAllPossiblePaths(self):
+        return self.all_paths
+
+    def getNumberAllPaths(self):
+        return len(self.all_paths)
 
 
 
@@ -112,4 +122,7 @@ for edge in graph_file:
     vertex2 = int(edge[1])
     graph.addEdge(vertex1, vertex2)
 
+# print (graph.getShortestPaths(1,9))
+# print()
+# print (graph.getAllPossiblePaths())
 # print(paths)

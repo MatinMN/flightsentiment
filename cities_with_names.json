@@ -1,79 +1,79 @@
 {
     "data" : {
-        "cities" : [
-            {
+        "cities" : {
+            "" :{
 
             },
-            {
+            "kuala lumpur" :{ 
                 "id" : 1,
                 "name" : "Malaysia",
                 "code" : "kl",
                 "lat" : 2.7455962,
                 "long" : 101.7071602 
             },
-            {
+            "singapore":{
                 "id" : 2,
                 "name" : "Singapore",
                 "code" : "sg",
                 "lat" : 1.3644202,
                 "long" : 103.9915308 
             },
-            {
+            "shanghai" : {
                 "id" : 3,
                 "name" : "Shanghai",
                 "code" : "sh",
                 "lat" : 31.1443439,
                 "long" : 121.808273 
             },
-            {
+            "tokyo" : {
                 "id" : 4,
                 "name" : "Tokyo",
                 "code" : "tyo",
                 "lat" : 35.7719867,
                 "long" : 140.3928501 
             },
-            {
+            "munich" : {
                 "id" : 5,
                 "name" : "Munich",
                 "code" : "mu",
                 "lat" : 48.3536621,
                 "long" : 11.7750279 
             },
-            {
+            "london" : {
                 "id" : 6,
                 "name" : "London",
                 "code" : "ldn",
                 "lat" : 51.5048437,
                 "long" : 0.049518 
             },
-            {
+            "ontario" : {
                 "id" : 7,
                 "name" : "canada",
                 "code" : "to",
                 "lat" : 48.37426019999999,
                 "long" : -89.3194986 
             },
-            {
+            "virginia" : {
                 "id" : 8,
                 "name" : "Virginia",
                 "code" : "wa",
                 "lat" : 36.8956837,
                 "long" : -76.2000161 
             },
-            {
+            "cairo" : {
                 "id" : 9,
                 "name" : "Cairo",
                 "code" : "cr",
                 "lat" : 30.1127092,
                 "long" : 31.3998558 
             },
-            {
+            "dubai" : {
                 "id" : 10,
                 "name" : "Dubai",
                 "code" : "db",
                 "lat" : 25.2531745,
                 "long" : 55.3656728
             }
-        ]
+        }
     }
 }
