@@ -25,7 +25,7 @@ def get_sentiment():
 
         exists = os.path.isfile('data/'+name+'.json')
 
-
+        
         if exists == False:
             all_articles = newsapi.get_everything(q= str(name) + str(query),
                                                 sources='bbc-news, abc-news, al-jazeera-english, ary-news, cbs-news, cnbc, cnn, fox-news, google-news, independent, msnbc, nbc-news, news24, new-york-magazine, politico, reuters, the-hindu, the-new-york-times, the-washington-post',
@@ -46,18 +46,19 @@ def get_sentiment():
         articles = all_articles['articles']
 
         url = articles[0]['url']
-        
-
-        exists = os.path.isfile('data/'+name+'-article.json')
+        print(articles[0]['url'])    
+        exists = os.path.isfile('data/'+name+'-article.html')
         if exists:
+            
             with open('data/'+name +'-article.html') as article_file:  
                 html = BeautifulSoup(article_file.read(), 'html.parser')
         else:
-            response = get(url)    
+            
+            print("downaloding")
+            response = get(url,stream=True)    
             html = BeautifulSoup(response.content, 'html.parser')
             with open('data/'+name + '-article.html', 'w+') as article_file:  
                 article_file.write(response.content)
-
         article = html.get_text()
 
         article = " ".join(article.split())

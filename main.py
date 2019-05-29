@@ -7,7 +7,14 @@ print("Enter which cities you would like to travel to :")
 city_code = input()
 
 sentiment_results = get_sentiment()
-print(graph.getPaths(1,city_code))
+paths = graph.getPaths(1,city_code)
+
+sentiment_value = []
+
+for path in paths:
+    
+    
+    
 
 
-pos_neg(sentiment_results)
+# pos_neg(sentiment_results)
