@@ -3,10 +3,19 @@ from sentiment import *
 from graph import graph
 from pos_neg import *
 from maper import *
+from all_routes import *
 
 print("Welcome to the flightsentiment app")
-print("Enter which cities you would like to travel to :")
-city_code = input()
+print("Enter Name of the city you like to travel to :")
+print("singapore, tokyo, shanghai, munich, virginia, ontario, london, cairo, dubai")
+print("Choose one destination please")
+
+print('----------------------------------------------------------------------------')
+dictionary = get_cities()
+city_code = raw_input()
+
+
+city_code = dictionary[str(city_code)]['id']
 
 sentiment_results = get_sentiment()
 paths = graph.getShortestPaths(1,city_code)
@@ -48,6 +57,9 @@ print(best_path)
 
 print("Ploting best path")
 plot_shortest_path(best_path)
+
+plot_all(graph.getAllPossiblePaths())
+
 
 pos_neg(sentiment_results)
 for i in range(1,len(city_names)):

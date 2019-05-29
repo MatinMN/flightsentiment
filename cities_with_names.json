@@ -1,9 +1,6 @@
 {
     "data" : {
         "cities" : {
-            "" :{
-
-            },
             "kuala lumpur" :{ 
                 "id" : 1,
                 "name" : "Malaysia",

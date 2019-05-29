@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 import json
 from graph import graph
 
-plotly.tools.set_credentials_file(username='azraf019', api_key='NY8kl4MVn6yUugcM6Gxc')
+plotly.tools.set_credentials_file(username='Ayoob', api_key='LyRWxrQ7Dhr6m2YZwOnf')
 
 
 def plot_shortest_path(path):
@@ -20,7 +20,7 @@ def plot_shortest_path(path):
 
     city = ''
     texts = []
-
+    print(path)
 
     for i in range(len(lists)-1):
         lats.append(cities[lists[i]]['lat'])

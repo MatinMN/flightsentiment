@@ -11,7 +11,7 @@ def get_countries():
     return data['data']['cities']
 
 def get_cities():
-    with open('cities_with_name.json') as json_file:  
+    with open('cities_with_names.json') as json_file:  
         data = json.load(json_file)
     return data['data']['cities']
 
