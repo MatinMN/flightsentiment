@@ -6,9 +6,9 @@ STOPLIST = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", 
 
 
 def get_countries():
-    with open('countries.json') as json_file:  
+    with open('cities.json') as json_file:  
         data = json.load(json_file)
-    return data['data']['countries']
+    return data['data']['cities']
 
 def loadPositiveWords():
     with open('positiveWords.json') as json_file:  
