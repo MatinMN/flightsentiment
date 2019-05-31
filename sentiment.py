@@ -33,7 +33,7 @@ def get_sentiment():
         results["negative"] = 0
         results["positive"] = 0
 
-        for i in range(1):
+        for i in range(4):
             url = articles[i]['url']
 
             results = get_positivity_score(name,url,results,i)
